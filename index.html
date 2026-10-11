@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineReview - Legal Movie Reviews & Trailers</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 20px; }
+        header { text-align: center; padding: 20px; border-bottom: 1px solid #333; }
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 30px; }
+        .movie-card { background: #1e1e1e; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+        .movie-card:hover { transform: scale(1.03); }
+        .movie-card img { width: 100%; height: 330px; object-fit: cover; }
+        .movie-info { padding: 15px; }
+        .movie-info h3 { font-size: 16px; margin: 0 0 10px; color: #fff; }
+        .movie-info p { color: #aaa; font-size: 14px; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎬 CineReview Hub</h1>
+        <p>Your trusted guide for legal movie reviews, trailers, and OTT recommendations.</p>
+    </header>
+
+    <div class="container" id="movie-grid">
+        <!-- Movies will load here -->
+    </div>
+
+    <script>
+        // Fallback sample movies data taaki bina network error ke turant design dikhe
+        const sampleMovies = [
+            { title: "Inception", poster_path: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg", vote_average: 8.8, release_date: "2010" },
+            { title: "Interstellar", poster_path: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", vote_average: 8.7, release_date: "2014" },
+            { title: "The Dark Knight", poster_path: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", vote_average: 9.0, release_date: "2008" },
+            { title: "Avatar: The Way of Water", poster_path: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg", vote_average: 7.6, release_date: "2022" },
+            { title: "Oppenheimer", poster_path: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", vote_average: 8.1, release_date: "2023" }
+        ];
+
+        function showMovies(movies) {
+            const grid = document.getElementById('movie-grid');
+            grid.innerHTML = '';
+            
+            movies.forEach(movie => {
+                const { title, poster_path, vote_average, release_date } = movie;
+                const card = document.createElement('div');
+                card.classList.add('movie-card');
+                
+                // Check if poster is full URL or relative path
+                const posterUrl = poster_path.startsWith('http') ? poster_path : 'https://image.tmdb.org/t/p/w500' + poster_path;
+
+                card.innerHTML = `
+                    <img src="${posterUrl}" alt="${title}">
+                    <div class="movie-info">
+                        <h3>${title}</h3>
+                        <p>⭐ ${vote_average} | 📅 ${release_date}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Load sample movies instantly
+        showMovies(sampleMovies);
+    </script>
+
+</body>
+</html>
