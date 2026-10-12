@@ -8,21 +8,20 @@
         body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
         
         /* Navbar Styling */
-        nav { background: #1a1a1a; border-bottom: 2px solid #333; padding: 12px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+        nav { background: #1a1a1a; border-bottom: 2px solid #333; padding: 10px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
         
-        /* Logo & Brand Style */
         .brand-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-icon { width: 36px; height: 36px; fill: #e50914; margin-right: 10px; }
-        .logo-text { font-size: 20px; font-weight: bold; color: #fff; letter-spacing: 0.5px; }
+        .logo-icon { width: 34px; height: 34px; fill: #e50914; margin-right: 8px; }
+        .logo-text { font-size: 18px; font-weight: bold; color: #fff; letter-spacing: 0.5px; }
         .logo-text span { color: #e50914; }
 
-        .nav-links { display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; align-items: center; }
-        .nav-links li { margin: 5px 10px; }
-        .nav-links a { color: #ccc; text-decoration: none; font-size: 14px; transition: color 0.3s; }
-        .nav-links a:hover { color: #e50914; }
+        /* Category Menu Bar */
+        .cat-bar { background: #000; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; border-bottom: 1px solid #222; }
+        .btn-cat { background: #1e1e1e; color: #fff; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: background 0.3s; }
+        .btn-cat:hover, .btn-cat.active { background: #e50914; }
+        .btn-special { background: #ffc107; color: #000; }
         
-        /* Search Bar in Nav */
-        .search-box { padding: 8px 15px; font-size: 14px; border-radius: 4px; border: 1px solid #444; background: #222; color: #fff; outline: none; width: 200px; }
+        .search-box { padding: 8px 15px; font-size: 14px; border-radius: 4px; border: 1px solid #444; background: #222; color: #fff; outline: none; width: 200px; margin-left: auto; }
         .search-box:focus { border-color: #e50914; }
 
         .main-content { padding: 25px; max-width: 1200px; margin: auto; }
@@ -56,23 +55,26 @@
     <!-- Top Navigation Bar with Logo -->
     <nav>
         <a href="#" class="brand-container">
-            <!-- Custom Movie Play Logo SVG -->
             <svg class="logo-icon" viewBox="0 0 24 24">
                 <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zM10 15l5-3-5-3v6z"/>
             </svg>
             <span class="logo-text">TheMovieReview<span>.online</span></span>
         </a>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Bollywood</a></li>
-            <li><a href="#">Hollywood</a></li>
-            <li><a href="#">Web Series</a></li>
-            <li><input type="text" id="search-input" class="search-box" placeholder="Search movies..." onkeyup="filterMovies()"></li>
-        </ul>
     </nav>
 
+    <!-- Category Menu Bar -->
+    <div class="cat-bar">
+        <button class="btn-cat btn-special" onclick="filterCategory('All')">🎬 All Movies</button>
+        <button class="btn-cat" onclick="filterCategory('Bollywood')">Bollywood</button>
+        <button class="btn-cat" onclick="filterCategory('Hollywood')">Hollywood</button>
+        <button class="btn-cat" onclick="filterCategory('South Hindi')">South Hindi</button>
+        <button class="btn-cat" onclick="filterCategory('Web Series')">Web Series</button>
+        
+        <input type="text" id="search-input" class="search-box" placeholder="Search movies..." onkeyup="filterMovies()">
+    </div>
+
     <div class="main-content">
-        <h2>🔥 Latest Releases & Reviews</h2>
+        <h2 id="section-title">🔥 Latest Releases & Reviews</h2>
         <div class="container" id="movie-grid">
             <!-- Movies will load here -->
         </div>
@@ -83,6 +85,7 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h2 id="modal-title">Movie Title</h2>
+            <p><strong>Category:</strong> <span id="modal-cat" style="color:#e50914;"></span></p>
             <p><strong>Rating:</strong> <span id="modal-rating"></span> | <strong>Release Year:</strong> <span id="modal-year"></span></p>
             <p><strong>Detailed Review:</strong> <span id="modal-review"></span></p>
             <p><strong>Official Trailer:</strong></p>
@@ -100,6 +103,7 @@
         const movies = [
             { 
                 title: "Inception", 
+                category: "Hollywood",
                 poster_path: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg", 
                 vote_average: 8.8, 
                 release_date: "2010",
@@ -109,6 +113,7 @@
             },
             { 
                 title: "Interstellar", 
+                category: "Hollywood",
                 poster_path: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", 
                 vote_average: 8.7, 
                 release_date: "2014",
@@ -118,6 +123,7 @@
             },
             { 
                 title: "The Dark Knight", 
+                category: "Hollywood",
                 poster_path: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", 
                 vote_average: 9.0, 
                 release_date: "2008",
@@ -126,31 +132,35 @@
                 ott_link: "https://www.primevideo.com"
             },
             { 
-                title: "Avatar: The Way of Water", 
+                title: "Pushpa 2 (Sample)", 
+                category: "South Hindi",
                 poster_path: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg", 
-                vote_average: 7.6, 
-                release_date: "2022",
-                review: "James Cameron ek baar phir hamein Pandora ki khoobsurat underwater duniya mein le jaate hain.",
-                trailer: "https://www.youtube.com/embed/d9MyW72ELq0",
-                ott_link: "https://www.hotstar.com"
+                vote_average: 8.5, 
+                release_date: "2024",
+                review: "Allu Arjun ka swag aur action sequence is movie ko blockbuster banate hain. Mass entertainment ka poora dose.",
+                trailer: "https://www.youtube.com/embed/1kVPzZcbbx8",
+                ott_link: "https://www.primevideo.com"
             },
             { 
-                title: "Oppenheimer", 
+                title: "Scam 1992 (Sample)", 
+                category: "Web Series",
                 poster_path: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", 
-                vote_average: 8.1, 
-                release_date: "2023",
-                review: "Atomic bomb ke creator J. Robert Oppenheimer ki life par bani yeh biographical drama thriller film bemisaal hai.",
-                trailer: "https://www.youtube.com/embed/uYPbbksJxIg",
-                ott_link: "https://www.primevideo.com"
+                vote_average: 9.3, 
+                release_date: "2020",
+                review: "Harshad Mehta ki life par bani yeh web series Indian OTT history ki sabse zabardast series mein se ek hai.",
+                trailer: "https://www.youtube.com/embed/isukUbwmwHM",
+                ott_link: "https://www.sonyliv.com"
             }
         ];
+
+        let currentCategory = 'All';
 
         function displayMovies(movieList) {
             const grid = document.getElementById('movie-grid');
             grid.innerHTML = '';
             
             if(movieList.length === 0) {
-                grid.innerHTML = '<div class="no-result">Koi movie nahi mili!</div>';
+                grid.innerHTML = '<div class="no-result">Is category mein koi movie nahi mili!</div>';
                 return;
             }
 
@@ -171,8 +181,21 @@
             });
         }
 
+        function filterCategory(category) {
+            currentCategory = category;
+            document.getElementById('section-title').innerText = category === 'All' ? '🔥 Latest Releases & Reviews' : `📁 ${category} Movies`;
+            
+            if(category === 'All') {
+                displayMovies(movies);
+            } else {
+                const filtered = movies.filter(m => m.category === category);
+                displayMovies(filtered);
+            }
+        }
+
         function openModal(movie) {
             document.getElementById('modal-title').innerText = movie.title;
+            document.getElementById('modal-cat').innerText = movie.category;
             document.getElementById('modal-rating').innerText = movie.vote_average;
             document.getElementById('modal-year').innerText = movie.release_date;
             document.getElementById('modal-review').innerText = movie.review;
@@ -198,7 +221,8 @@
 
         function filterMovies() {
             const query = document.getElementById('search-input').value.toLowerCase();
-            const filtered = movies.filter(m => m.title.toLowerCase().includes(query));
+            let baseList = currentCategory === 'All' ? movies : movies.filter(m => m.category === currentCategory);
+            const filtered = baseList.filter(m => m.title.toLowerCase().includes(query));
             displayMovies(filtered);
         }
 
