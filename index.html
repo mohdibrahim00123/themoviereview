@@ -3,46 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineReview - Legal Movie Reviews & Trailers</title>
+    <title>CineReview Hub - Legal Movie Reviews & Trailers</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 20px; }
-        header { text-align: center; padding: 20px; border-bottom: 1px solid #333; }
-        .search-container { margin: 25px auto; text-align: center; }
-        .search-box { width: 100%; max-width: 400px; padding: 12px 20px; font-size: 16px; border-radius: 25px; border: 1px solid #444; background: #1e1e1e; color: #fff; outline: none; }
+        body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
+        
+        /* Navbar Styling */
+        nav { background: #1a1a1a; border-bottom: 2px solid #333; padding: 10px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: bold; color: #e50914; text-decoration: none; }
+        .nav-links { display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; align-items: center; }
+        .nav-links li { margin: 5px 10px; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: #e50914; }
+        
+        /* Search Bar in Nav */
+        .search-box { padding: 8px 15px; font-size: 14px; border-radius: 4px; border: 1px solid #444; background: #222; color: #fff; outline: none; width: 200px; }
         .search-box:focus { border-color: #e50914; }
-        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
-        .movie-card { background: #1e1e1e; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; cursor: pointer; }
+
+        .main-content { padding: 20px; }
+        h2 { border-left: 4px solid #e50914; padding-left: 10px; margin-top: 20px; font-size: 20px; }
+        
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
+        .movie-card { background: #1e1e1e; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; cursor: pointer; }
         .movie-card:hover { transform: scale(1.03); }
-        .movie-card img { width: 100%; height: 330px; object-fit: cover; }
-        .movie-info { padding: 15px; }
-        .movie-info h3 { font-size: 16px; margin: 0 0 10px; color: #fff; }
-        .movie-info p { color: #aaa; font-size: 14px; margin: 0; }
+        .movie-card img { width: 100%; height: 300px; object-fit: cover; }
+        .movie-info { padding: 12px; }
+        .movie-info h3 { font-size: 15px; margin: 0 0 8px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .movie-info p { color: #aaa; font-size: 13px; margin: 0; }
         .no-result { text-align: center; grid-column: 1/-1; color: #aaa; font-size: 18px; margin-top: 30px; }
 
         /* Modal Styles */
-        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); overflow-y: auto; padding: 20px; box-sizing: border-box; }
-        .modal-content { background-color: #1a1a1a; margin: 40px auto; padding: 25px; border-radius: 10px; width: 100%; max-width: 600px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; }
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); overflow-y: auto; padding: 20px; box-sizing: border-box; }
+        .modal-content { background-color: #1a1a1a; margin: 40px auto; padding: 25px; border-radius: 8px; width: 100%; max-width: 600px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; }
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
         .close-btn:hover { color: #fff; }
-        .modal-content h2 { margin-top: 0; color: #fff; }
-        .modal-content p { color: #ccc; line-height: 1.6; }
+        .modal-content h2 { margin-top: 0; color: #fff; border: none; }
+        .modal-content p { color: #ccc; line-height: 1.6; font-size: 14px; }
         .btn-ott { display: inline-block; background: #e50914; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 15px; font-weight: bold; }
         .btn-ott:hover { background: #b20710; }
+
+        /* Footer */
+        footer { text-align: center; padding: 20px; border-top: 1px solid #333; margin-top: 40px; color: #777; font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🎬 CineReview Hub</h1>
-        <p>Your trusted guide for legal movie reviews, trailers, and OTT recommendations.</p>
-        
-        <div class="search-container">
-            <input type="text" id="search-input" class="search-box" placeholder="Search movies (e.g., Inception, Avatar)..." onkeyup="filterMovies()">
-        </div>
-    </header>
+    <!-- Top Navigation Bar -->
+    <nav>
+        <a href="#" class="logo">🎬 CineReview Hub</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Bollywood</a></li>
+            <li><a href="#">Hollywood</a></li>
+            <li><a href="#">Web Series</a></li>
+            <li><a href="#">Trailers</a></li>
+            <li><input type="text" id="search-input" class="search-box" placeholder="Search movies..." onkeyup="filterMovies()"></li>
+        </ul>
+    </nav>
 
-    <div class="container" id="movie-grid">
-        <!-- Movies will load here -->
+    <div class="main-content">
+        <h2>🔥 Latest Releases & Reviews</h2>
+        <div class="container" id="movie-grid">
+            <!-- Movies will load here -->
+        </div>
     </div>
 
     <!-- Movie Detail Modal -->
@@ -53,13 +75,15 @@
             <p><strong>Rating:</strong> <span id="modal-rating"></span> | <strong>Release Year:</strong> <span id="modal-year"></span></p>
             <p><strong>Detailed Review:</strong> <span id="modal-review"></span></p>
             <p><strong>Official Trailer:</strong></p>
-            <div id="modal-trailer-container">
-                <!-- Trailer iframe/link will load here -->
-            </div>
+            <div id="modal-trailer-container"></div>
             <br>
             <a id="modal-ott-link" href="#" target="_blank" class="btn-ott">Watch on Official OTT / Legal Partner</a>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2026 CineReview Hub | 100% Legal Reviews & Trailers Guide</p>
+    </footer>
 
     <script>
         const movies = [
@@ -68,7 +92,7 @@
                 poster_path: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg", 
                 vote_average: 8.8, 
                 release_date: "2010",
-                review: "Christopher Nolan ki yeh sci-fi masterpiece dimaag ke saare tar तार hila deti hai. Dream-sharing concept aur visual effects bejod hain. Ek baar zaroor dekhne wali film hai.",
+                review: "Christopher Nolan ki yeh sci-fi masterpiece dimaag ke saare taar hila deti hai. Dream-sharing concept aur visual effects bejod hain.",
                 trailer: "https://www.youtube.com/embed/YoHD9XEInc0",
                 ott_link: "https://www.netflix.com"
             },
@@ -77,7 +101,7 @@
                 poster_path: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", 
                 vote_average: 8.7, 
                 release_date: "2014",
-                review: "Space, time dilation, aur baap-beti ke emotional bond par bani yeh film cinema history ki sabse behtareen sci-fi films mein se ek hai. Hans Zimmer ka music rooh khush kar deta hai.",
+                review: "Space, time dilation, aur baap-beti ke emotional bond par bani yeh film cinema history ki sabse behtareen sci-fi films mein se ek hai.",
                 trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
                 ott_link: "https://www.primevideo.com"
             },
@@ -86,7 +110,7 @@
                 poster_path: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", 
                 vote_average: 9.0, 
                 release_date: "2008",
-                review: "Heath Ledger ka Joker aur Christian Bale ka Batman—yeh movie superhero genre ki definition badal deti hai. Dark, gritty aur brilliant screenplay.",
+                review: "Heath Ledger ka Joker aur Christian Bale ka Batman—yeh movie superhero genre ki definition badal deti hai.",
                 trailer: "https://www.youtube.com/embed/EXeTwQWrcwY",
                 ott_link: "https://www.primevideo.com"
             },
@@ -95,7 +119,7 @@
                 poster_path: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg", 
                 vote_average: 7.6, 
                 release_date: "2022",
-                review: "James Cameron ek baar phir hamein Pandora ki khoobsurat underwater duniya mein le jaate hain. Visuals itne shandar hain ki aankhein khuli reh jati hain.",
+                review: "James Cameron ek baar phir hamein Pandora ki khoobsurat underwater duniya mein le jaate hain.",
                 trailer: "https://www.youtube.com/embed/d9MyW72ELq0",
                 ott_link: "https://www.hotstar.com"
             },
@@ -104,7 +128,7 @@
                 poster_path: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", 
                 vote_average: 8.1, 
                 release_date: "2023",
-                review: "Atomic bomb ke creator J. Robert Oppenheimer ki life par bani yeh biographical drama thriller film acting aur direction ke mamle mein bemisaal hai.",
+                review: "Atomic bomb ke creator J. Robert Oppenheimer ki life par bani yeh biographical drama thriller film bemisaal hai.",
                 trailer: "https://www.youtube.com/embed/uYPbbksJxIg",
                 ott_link: "https://www.primevideo.com"
             }
@@ -119,7 +143,7 @@
                 return;
             }
 
-            movieList.forEach((movie, index) => {
+            movieList.forEach(movie => {
                 const { title, poster_path, vote_average, release_date } = movie;
                 const card = document.createElement('div');
                 card.classList.add('movie-card');
@@ -151,10 +175,9 @@
 
         function closeModal() {
             document.getElementById('movieModal').style.display = 'none';
-            document.getElementById('modal-trailer-container').innerHTML = ''; // Stop video when closing
+            document.getElementById('modal-trailer-container').innerHTML = '';
         }
 
-        // Close modal when clicking outside of it
         window.onclick = function(event) {
             const modal = document.getElementById('movieModal');
             if (event.target == modal) {
@@ -168,7 +191,6 @@
             displayMovies(filtered);
         }
 
-        // Initial load
         displayMovies(movies);
     </script>
 
