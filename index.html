@@ -8,10 +8,13 @@
         body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 0; }
         
         /* Navbar Styling */
-        nav { background: #1a1a1a; border-bottom: 2px solid #333; padding: 15px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+        nav { background: #1a1a1a; border-bottom: 2px solid #333; padding: 12px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
         
-        /* Logo Image Style - Ab size bada aur behtareen dikhega */
-        .brand-logo { max-height: 85px; width: auto; object-fit: contain; }
+        /* Brand Logo + Text Container */
+        .brand-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .brand-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .brand-title { font-size: 22px; font-weight: bold; color: #fff; letter-spacing: 0.5px; }
+        .brand-title span { color: #e50914; }
 
         /* Category Menu Bar */
         .cat-bar { background: #000; padding: 12px 25px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; border-bottom: 1px solid #222; }
@@ -50,11 +53,11 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar with Banner Logo -->
+    <!-- Top Navigation Bar with Logo and Site Name -->
     <nav>
-        <a href="#">
-            <!-- Yahan banner.jpg use kiya gaya hai (agar RoundBanner use karna ho toh yahan naam badal sakte hain) -->
-            <img src="RoundBanner.png" alt="TheMovieReview.online Logo" class="brand-logo">
+        <a href="#" class="brand-container">
+            <img src="RoundBanner.png" alt="Logo" class="brand-logo">
+            <div class="brand-title">TheMovieReview<span>.online</span></div>
         </a>
     </nav>
 
