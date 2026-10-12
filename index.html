@@ -10,7 +10,6 @@
         /* Navbar Styling */
         nav { background: #1a1a1a; border-bottom: 2px solid #333; padding: 12px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
         
-        /* Brand Logo + Text Container */
         .brand-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
         .brand-logo { max-height: 55px; width: auto; object-fit: contain; }
         .brand-title { font-size: 22px; font-weight: bold; color: #fff; letter-spacing: 0.5px; }
@@ -47,13 +46,16 @@
         .btn-ott { display: inline-block; background: #e50914; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 15px; font-weight: bold; }
         .btn-ott:hover { background: #b20710; }
 
-        /* Footer */
+        /* Footer Links Styling */
         footer { text-align: center; padding: 25px; border-top: 1px solid #333; margin-top: 40px; color: #777; font-size: 13px; }
+        .footer-links { margin-bottom: 10px; }
+        .footer-links a { color: #aaa; text-decoration: none; margin: 0 15px; transition: color 0.3s; }
+        .footer-links a:hover { color: #e50914; }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar with Logo and Site Name -->
+    <!-- Top Navigation Bar -->
     <nav>
         <a href="#" class="brand-container">
             <img src="RoundBanner.png" alt="Logo" class="brand-logo">
@@ -94,7 +96,22 @@
         </div>
     </div>
 
+    <!-- Info Modal for Privacy Policy & Disclaimer -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeInfoModal()">&times;</span>
+            <h2 id="info-modal-title">Title</h2>
+            <div id="info-modal-body" style="color: #ccc; line-height: 1.6; font-size: 14px; max-height: 400px; overflow-y: auto;"></div>
+        </div>
+    </div>
+
+    <!-- Footer with Legal Links -->
     <footer>
+        <div class="footer-links">
+            <a href="#" onclick="openPage('privacy')">Privacy Policy</a> | 
+            <a href="#" onclick="openPage('disclaimer')">Disclaimer</a> | 
+            <a href="#" onclick="openPage('terms')">Terms & Conditions</a>
+        </div>
         <p>&copy; 2026 TheMovieReview.online | 100% Legal Reviews, Trailers & OTT Guide</p>
     </footer>
 
@@ -211,10 +228,36 @@
             document.getElementById('modal-trailer-container').innerHTML = '';
         }
 
+        function openPage(type) {
+            const titleElem = document.getElementById('info-modal-title');
+            const bodyElem = document.getElementById('info-modal-body');
+            
+            if(type === 'privacy') {
+                titleElem.innerText = 'Privacy Policy';
+                bodyElem.innerHTML = `<p>At TheMovieReview.online, accessible from themoviereview.online, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by TheMovieReview.online and how we use it.</p><p>We use third-party advertising companies to serve ads when you visit our website. These companies may use information about your visits to provide advertisements about goods and services of interest to you.</p>`;
+            } else if(type === 'disclaimer') {
+                titleElem.innerText = 'Disclaimer';
+                bodyElem.innerHTML = `<p>All the information on this website - TheMovieReview.online - is published in good faith and for general information purpose only. TheMovieReview.online does not make any warranties about the completeness, reliability, and accuracy of this information.</p><p>We only provide genuine reviews, official trailers hosted on YouTube, and legal streaming destination links. We do not host or promote any pirated content.</p>`;
+            } else if(type === 'terms') {
+                titleElem.innerText = 'Terms & Conditions';
+                bodyElem.innerHTML = `<p>Welcome to TheMovieReview.online! These terms and conditions outline the rules and regulations for the use of our website.</p><p>By accessing this website we assume you accept these terms and conditions. Do not continue to use TheMovieReview.online if you do not agree to all of the terms and conditions stated on this page.</p>`;
+            }
+            
+            document.getElementById('infoModal').style.display = 'block';
+        }
+
+        function closeInfoModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
         window.onclick = function(event) {
-            const modal = document.getElementById('movieModal');
-            if (event.target == modal) {
+            const movieModal = document.getElementById('movieModal');
+            const infoModal = document.getElementById('infoModal');
+            if (event.target == movieModal) {
                 closeModal();
+            }
+            if (event.target == infoModal) {
+                closeInfoModal();
             }
         }
 
