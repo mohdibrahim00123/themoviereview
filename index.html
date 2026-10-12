@@ -10,10 +10,8 @@
         /* Navbar Styling */
         nav { background: #1a1a1a; border-bottom: 2px solid #333; padding: 10px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
         
-        .brand-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-icon { width: 34px; height: 34px; fill: #e50914; margin-right: 8px; }
-        .logo-text { font-size: 18px; font-weight: bold; color: #fff; letter-spacing: 0.5px; }
-        .logo-text span { color: #e50914; }
+        /* Logo Image Style */
+        .brand-logo { max-height: 55px; width: auto; object-fit: contain; }
 
         /* Category Menu Bar */
         .cat-bar { background: #000; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; border-bottom: 1px solid #222; }
@@ -52,13 +50,11 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar with Logo -->
+    <!-- Top Navigation Bar with Uploaded Banner/Logo -->
     <nav>
-        <a href="#" class="brand-container">
-            <svg class="logo-icon" viewBox="0 0 24 24">
-                <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zM10 15l5-3-5-3v6z"/>
-            </svg>
-            <span class="logo-text">TheMovieReview<span>.online</span></span>
+        <a href="#">
+            <!-- Yahan banner.jpg aapki upload ki gayi image load karega -->
+            <img src="banner.jpg" alt="TheMovieReview.online Logo" class="brand-logo">
         </a>
     </nav>
 
