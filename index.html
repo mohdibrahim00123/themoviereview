@@ -118,6 +118,46 @@
     <script>
         const movies = [
             { 
+                title: "Stree 2", 
+                category: "Bollywood",
+                poster_path: "https://image.tmdb.org/t/p/w500/vXw5x02Kq7XN888a712f5a0b6cc.jpg", 
+                vote_average: 7.8, 
+                release_date: "2024",
+                review: "Comedy aur horror ka bejod combination! Rajkummar Rao aur Shraddha Kapoor ki yeh film poore parivar ke sath dekhne ke liye ekdam zabardast entertainer hai.",
+                trailer: "https://www.youtube.com/embed/BVv_iux6XwA",
+                ott_link: "https://www.primevideo.com"
+            },
+            { 
+                title: "Animal", 
+                category: "Bollywood",
+                poster_path: "https://image.tmdb.org/t/p/w500/85ShuCCtSBPDugpI3cOpyE7NAsq.jpg", 
+                vote_average: 7.3, 
+                release_date: "2023",
+                review: "Sandeep Reddy Vanga ki yeh action thriller film Ranbir Kapoor ki powerhouse performance ke liye yaad ki jayegi. Intense aur action-packed drama.",
+                trailer: "https://www.youtube.com/embed/8ivbxfwZkk0",
+                ott_link: "https://www.netflix.com"
+            },
+            { 
+                title: "Pathaan", 
+                category: "Bollywood",
+                poster_path: "https://image.tmdb.org/t/p/w500/mYKkJh9Hmxze1pT4d7WbKz2Z9Wf.jpg", 
+                vote_average: 6.9, 
+                release_date: "2023",
+                review: "Shah Rukh Khan ka action-packed comeback! Spy universe ki yeh film high-octane stunts aur VFX se bhari hui hai.",
+                trailer: "https://www.youtube.com/embed/vqu4z34wENw",
+                ott_link: "https://www.primevideo.com"
+            },
+            { 
+                title: "Jawan", 
+                category: "Bollywood",
+                poster_path: "https://image.tmdb.org/t/p/w500/jfYLuICzXvXq3zX1bEwO48h88fW.jpg", 
+                vote_average: 7.4, 
+                release_date: "2023",
+                review: "Atlee aur Shah Rukh Khan ki jodi ne box office par dhoom macha di. Social message ke sath mass action ka zabardast tadka.",
+                trailer: "https://www.youtube.com/embed/COvBvKwGft8",
+                ott_link: "https://www.netflix.com"
+            },
+            { 
                 title: "Inception", 
                 category: "Hollywood",
                 poster_path: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg", 
@@ -148,9 +188,19 @@
                 ott_link: "https://www.primevideo.com"
             },
             { 
-                title: "Pushpa 2 (Sample)", 
-                category: "South Hindi",
+                title: "Avatar: The Way of Water", 
+                category: "Hollywood",
                 poster_path: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg", 
+                vote_average: 7.6, 
+                release_date: "2022",
+                review: "James Cameron ek baar phir hamein Pandora ki khoobsurat underwater duniya mein le jaate hain.",
+                trailer: "https://www.youtube.com/embed/d9MyW72ELq0",
+                ott_link: "https://www.hotstar.com"
+            },
+            { 
+                title: "Pushpa 2: The Rule", 
+                category: "South Hindi",
+                poster_path: "https://image.tmdb.org/t/p/w500/mUGt9E5OeyYtX6K94oYdZ86W06z.jpg", 
                 vote_average: 8.5, 
                 release_date: "2024",
                 review: "Allu Arjun ka swag aur action sequence is movie ko blockbuster banate hain. Mass entertainment ka poora dose.",
@@ -158,7 +208,27 @@
                 ott_link: "https://www.primevideo.com"
             },
             { 
-                title: "Scam 1992 (Sample)", 
+                title: "KGF Chapter 2", 
+                category: "South Hindi",
+                poster_path: "https://image.tmdb.org/t/p/w500/khdJ3Y6r1uT0WkP3p87z6V0e206.jpg", 
+                vote_average: 8.3, 
+                release_date: "2022",
+                review: "Yash as Rocky Bhai rocks! High-voltage action aur powerful background score is film ki jaan hain.",
+                trailer: "https://www.youtube.com/embed/JKa05nyUmuQ",
+                ott_link: "https://www.primevideo.com"
+            },
+            { 
+                title: "Baahubali 2: The Conclusion", 
+                category: "South Hindi",
+                poster_path: "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg", 
+                vote_average: 8.2, 
+                release_date: "2017",
+                review: "S.S. Rajamouli ki yeh epic historical drama Indian cinema ka milestone hai. 'Kattappa ne Baahubali ko kyun maara?' ka jawaab aur grand visuals bejod hain.",
+                trailer: "https://www.youtube.com/embed/GiyT3rrpdvI",
+                ott_link: "https://www.netflix.com"
+            },
+            { 
+                title: "Scam 1992", 
                 category: "Web Series",
                 poster_path: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", 
                 vote_average: 9.3, 
@@ -166,6 +236,26 @@
                 review: "Harshad Mehta ki life par bani yeh web series Indian OTT history ki sabse zabardast series mein se ek hai.",
                 trailer: "https://www.youtube.com/embed/isukUbwmwHM",
                 ott_link: "https://www.sonyliv.com"
+            },
+            { 
+                title: "Mirzapur", 
+                category: "Web Series",
+                poster_path: "https://image.tmdb.org/t/p/w500/wXfxu2fbrfW4nZ8s9G6h7Xb63aN.jpg", 
+                vote_average: 8.5, 
+                release_date: "2020",
+                review: "Kaleen Bhaiya aur Guddu Pandit ki kahani—crime, power, aur revenge par bani yeh series youth mein behad popular hai.",
+                trailer: "https://www.youtube.com/embed/ZVCfZu_hptk",
+                ott_link: "https://www.primevideo.com"
+            },
+            { 
+                title: "The Family Man", 
+                category: "Web Series",
+                poster_path: "https://image.tmdb.org/t/p/w500/l0u4uK33s5jU43eF0N1Y86W17r5.jpg", 
+                vote_average: 8.7, 
+                release_date: "2021",
+                review: "Manoj Bajpayee ki spy thriller series jo apni family life aur nation security ke beech balance banane ki koshish karta hai. Thrilling aur humorous.",
+                trailer: "https://www.youtube.com/embed/XWjjxTGiWc8",
+                ott_link: "https://www.primevideo.com"
             }
         ];
 
