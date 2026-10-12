@@ -11,13 +11,23 @@
         .search-box { width: 100%; max-width: 400px; padding: 12px 20px; font-size: 16px; border-radius: 25px; border: 1px solid #444; background: #1e1e1e; color: #fff; outline: none; }
         .search-box:focus { border-color: #e50914; }
         .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
-        .movie-card { background: #1e1e1e; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+        .movie-card { background: #1e1e1e; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; cursor: pointer; }
         .movie-card:hover { transform: scale(1.03); }
         .movie-card img { width: 100%; height: 330px; object-fit: cover; }
         .movie-info { padding: 15px; }
         .movie-info h3 { font-size: 16px; margin: 0 0 10px; color: #fff; }
         .movie-info p { color: #aaa; font-size: 14px; margin: 0; }
         .no-result { text-align: center; grid-column: 1/-1; color: #aaa; font-size: 18px; margin-top: 30px; }
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); overflow-y: auto; padding: 20px; box-sizing: border-box; }
+        .modal-content { background-color: #1a1a1a; margin: 40px auto; padding: 25px; border-radius: 10px; width: 100%; max-width: 600px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; }
+        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-btn:hover { color: #fff; }
+        .modal-content h2 { margin-top: 0; color: #fff; }
+        .modal-content p { color: #ccc; line-height: 1.6; }
+        .btn-ott { display: inline-block; background: #e50914; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 15px; font-weight: bold; }
+        .btn-ott:hover { background: #b20710; }
     </style>
 </head>
 <body>
@@ -35,13 +45,69 @@
         <!-- Movies will load here -->
     </div>
 
+    <!-- Movie Detail Modal -->
+    <div id="movieModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Movie Title</h2>
+            <p><strong>Rating:</strong> <span id="modal-rating"></span> | <strong>Release Year:</strong> <span id="modal-year"></span></p>
+            <p><strong>Detailed Review:</strong> <span id="modal-review"></span></p>
+            <p><strong>Official Trailer:</strong></p>
+            <div id="modal-trailer-container">
+                <!-- Trailer iframe/link will load here -->
+            </div>
+            <br>
+            <a id="modal-ott-link" href="#" target="_blank" class="btn-ott">Watch on Official OTT / Legal Partner</a>
+        </div>
+    </div>
+
     <script>
         const movies = [
-            { title: "Inception", poster_path: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg", vote_average: 8.8, release_date: "2010" },
-            { title: "Interstellar", poster_path: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", vote_average: 8.7, release_date: "2014" },
-            { title: "The Dark Knight", poster_path: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", vote_average: 9.0, release_date: "2008" },
-            { title: "Avatar: The Way of Water", poster_path: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg", vote_average: 7.6, release_date: "2022" },
-            { title: "Oppenheimer", poster_path: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", vote_average: 8.1, release_date: "2023" }
+            { 
+                title: "Inception", 
+                poster_path: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg", 
+                vote_average: 8.8, 
+                release_date: "2010",
+                review: "Christopher Nolan ki yeh sci-fi masterpiece dimaag ke saare tar तार hila deti hai. Dream-sharing concept aur visual effects bejod hain. Ek baar zaroor dekhne wali film hai.",
+                trailer: "https://www.youtube.com/embed/YoHD9XEInc0",
+                ott_link: "https://www.netflix.com"
+            },
+            { 
+                title: "Interstellar", 
+                poster_path: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", 
+                vote_average: 8.7, 
+                release_date: "2014",
+                review: "Space, time dilation, aur baap-beti ke emotional bond par bani yeh film cinema history ki sabse behtareen sci-fi films mein se ek hai. Hans Zimmer ka music rooh khush kar deta hai.",
+                trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
+                ott_link: "https://www.primevideo.com"
+            },
+            { 
+                title: "The Dark Knight", 
+                poster_path: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", 
+                vote_average: 9.0, 
+                release_date: "2008",
+                review: "Heath Ledger ka Joker aur Christian Bale ka Batman—yeh movie superhero genre ki definition badal deti hai. Dark, gritty aur brilliant screenplay.",
+                trailer: "https://www.youtube.com/embed/EXeTwQWrcwY",
+                ott_link: "https://www.primevideo.com"
+            },
+            { 
+                title: "Avatar: The Way of Water", 
+                poster_path: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg", 
+                vote_average: 7.6, 
+                release_date: "2022",
+                review: "James Cameron ek baar phir hamein Pandora ki khoobsurat underwater duniya mein le jaate hain. Visuals itne shandar hain ki aankhein khuli reh jati hain.",
+                trailer: "https://www.youtube.com/embed/d9MyW72ELq0",
+                ott_link: "https://www.hotstar.com"
+            },
+            { 
+                title: "Oppenheimer", 
+                poster_path: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", 
+                vote_average: 8.1, 
+                release_date: "2023",
+                review: "Atomic bomb ke creator J. Robert Oppenheimer ki life par bani yeh biographical drama thriller film acting aur direction ke mamle mein bemisaal hai.",
+                trailer: "https://www.youtube.com/embed/uYPbbksJxIg",
+                ott_link: "https://www.primevideo.com"
+            }
         ];
 
         function displayMovies(movieList) {
@@ -53,10 +119,11 @@
                 return;
             }
 
-            movieList.forEach(movie => {
+            movieList.forEach((movie, index) => {
                 const { title, poster_path, vote_average, release_date } = movie;
                 const card = document.createElement('div');
                 card.classList.add('movie-card');
+                card.onclick = () => openModal(movie);
                 
                 card.innerHTML = `
                     <img src="${poster_path}" alt="${title}">
@@ -67,6 +134,32 @@
                 `;
                 grid.appendChild(card);
             });
+        }
+
+        function openModal(movie) {
+            document.getElementById('modal-title').innerText = movie.title;
+            document.getElementById('modal-rating').innerText = movie.vote_average;
+            document.getElementById('modal-year').innerText = movie.release_date;
+            document.getElementById('modal-review').innerText = movie.review;
+            document.getElementById('modal-ott-link').href = movie.ott_link;
+            
+            const trailerContainer = document.getElementById('modal-trailer-container');
+            trailerContainer.innerHTML = `<iframe width="100%" height="315" src="${movie.trailer}" title="YouTube trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            
+            document.getElementById('movieModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('movieModal').style.display = 'none';
+            document.getElementById('modal-trailer-container').innerHTML = ''; // Stop video when closing
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('movieModal');
+            if (event.target == modal) {
+                closeModal();
+            }
         }
 
         function filterMovies() {
